@@ -38,23 +38,25 @@
     .section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
     .section-num { background: var(--red); color: #fff; font-size: 12px; font-weight: 800; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
     .section h2 { font-family: 'Lora', serif; font-size: 20px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-    .section p { font-size: 14.5px; color: var(--ink-soft); margin-bottom: 12px; line-height: 1.75; text-align: justify; hyphens: auto; }
+    .section p { font-size: 14.5px; color: var(--ink-soft); margin-bottom: 12px; line-height: 1.75; text-align: justify; -webkit-text-align: justify; text-align-last: left; -webkit-hyphens: auto; hyphens: auto; }
     .section p:last-child { margin-bottom: 0; }
     .info-box { background: var(--accent); border: 1.5px solid var(--border); padding: 18px 22px; margin: 16px 0; }
     .info-box.red { background: var(--red-light); border-color: #ffc9c9; }
-    .info-box p { font-size: 13.5px !important; margin-bottom: 0 !important; text-align: justify !important; hyphens: auto; }
-    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13.5px; }
+    .info-box p { font-size: 13.5px !important; margin-bottom: 0 !important; text-align: justify !important; -webkit-text-align: justify !important; text-align-last: left !important; -webkit-hyphens: auto; hyphens: auto; }
+    .table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 16px 0; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 420px; }
     .data-table th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-    .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--ink-soft); vertical-align: top; text-align: justify; hyphens: auto; }
+    .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--ink-soft); vertical-align: top; text-align: justify; -webkit-text-align: justify; text-align-last: left; word-break: break-word; -webkit-hyphens: auto; hyphens: auto; }
+    .data-table td code { word-break: break-all; font-size: 11px; }
     .data-table tr:nth-child(even) td { background: var(--accent); }
-    code { font-size: 12px; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; color: var(--red-dark); }
+    code { font-size: 12px; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; color: var(--red-dark); word-break: break-all; }
     .check-list { list-style: none; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
-    .check-list li { font-size: 14px; color: var(--ink-soft); padding-left: 24px; position: relative; text-align: justify; hyphens: auto; }
+    .check-list li { font-size: 14px; color: var(--ink-soft); padding-left: 24px; position: relative; text-align: justify; -webkit-text-align: justify; text-align-last: left; -webkit-hyphens: auto; hyphens: auto; }
     .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--red); font-weight: 800; }
     .contact-card { background: var(--ink); color: #fff; padding: 32px; margin-top: 16px; }
     .contact-card h3 { font-family: 'Lora', serif; font-size: 18px; margin-bottom: 16px; font-weight: 600; }
     .contact-row { display: flex; flex-direction: column; gap: 8px; }
-    .contact-row span { font-size: 13.5px; opacity: 0.8; }
+    .contact-row span { font-size: 13.5px; opacity: 0.8; word-break: break-word; }
     .contact-row span strong { color: #fff; opacity: 1; }
     hr { border: none; border-top: 1.5px solid var(--border); margin: 40px 0; }
     footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 24px 32px; font-size: 12px; }
@@ -118,7 +120,7 @@
       <h2>Data yang Dikumpulkan</h2>
     </div>
     <p>Aplikasi mengumpulkan data berikut untuk keperluan operasional:</p>
-    <table class="data-table">
+    <div class="table-wrap"><table class="data-table">
       <thead><tr><th>Jenis Data</th><th>Keterangan</th><th>Tujuan</th></tr></thead>
       <tbody>
         <tr><td><strong>Nama & Email</strong></td><td>Data akun karyawan</td><td>Autentikasi & identifikasi pengguna</td></tr>
@@ -129,7 +131,7 @@
         <tr><td><strong>Riwayat Upload</strong></td><td>Log waktu & file yang diupload</td><td>Audit internal (disimpan 90 hari)</td></tr>
         <tr><td><strong>Token Google OAuth</strong></td><td>Kredensial akses Google Drive</td><td>Otorisasi upload ke Drive karyawan</td></tr>
       </tbody>
-    </table>
+    </table></div>
   </section>
 
   <section class="section" id="s3">
@@ -138,14 +140,14 @@
       <h2>Penggunaan Google Drive API</h2>
     </div>
     <p>Aplikasi menggunakan <strong>Google Drive API</strong> untuk menyimpan file rekaman dan foto secara terorganisir. Berikut penjelasan lengkap penggunaan akses Google yang diminta:</p>
-    <table class="data-table">
+    <div class="table-wrap"><table class="data-table">
       <thead><tr><th>Scope yang Diminta</th><th>Alasan Dibutuhkan</th></tr></thead>
       <tbody>
         <tr><td><code>https://www.googleapis.com/auth/drive</code></td><td>Membuat subfolder otomatis berdasarkan nomor mesin, dan mengupload file rekaman/foto ke folder Google Drive milik karyawan</td></tr>
         <tr><td><code>openid</code></td><td>Verifikasi identitas akun Google karyawan saat menghubungkan Drive</td></tr>
         <tr><td><code>https://www.googleapis.com/auth/userinfo.email</code></td><td>Menampilkan email Google yang terhubung di halaman pengaturan aplikasi</td></tr>
       </tbody>
-    </table>
+    </table></div>
     <div class="info-box red">
       <p>⚠️ <strong>Penting:</strong> Aplikasi <strong>hanya mengupload file</strong> ke Google Drive karyawan. Aplikasi tidak membaca, mengunduh, menghapus, atau mengakses file lain yang sudah ada di Drive karyawan di luar folder yang dibuat oleh aplikasi ini.</p>
     </div>
